@@ -11,7 +11,7 @@ def format_authors_affiliations(df):
     total_affiliations = len([x for x in df.columns.to_list() if 'affiliation' in x]) + 1
 
     for _, row in df.iterrows():
-        full_name = f"{row['first Name']} {row['middle name'] if pd.notna(row['middle name']) else ''} {row['surname']}".strip()
+        full_name = f"{row['first name']} {row['middle name'] if pd.notna(row['middle name']) else ''} {row['surname']}".strip()
         affiliations = [row[f'affiliation{i}'] for i in range(1, total_affiliations) if pd.notna(row[f'affiliation{i}'])]
 
         affiliation_indices = []
