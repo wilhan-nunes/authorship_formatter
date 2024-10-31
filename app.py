@@ -7,10 +7,11 @@ def format_authors_affiliations(df):
     authors = []
     affiliations_dict = {}
     affiliation_counter = 1
+    total_affiliations = len([x for x in df.columns.to_list() if 'Affiliation' in x]) + 1
 
     for _, row in df.iterrows():
         full_name = f"{row['First Name']} {row['Middle Name'] if pd.notna(row['Middle Name']) else ''} {row['Surname']}".strip()
-        affiliations = [row[f'Affiliation{i}'] for i in range(1, 5) if pd.notna(row[f'Affiliation{i}'])]
+        affiliations = [row[f'Affiliation{i}'] for i in range(1, total_affiliations) if pd.notna(row[f'Affiliation{i}'])]
 
         affiliation_indices = []
         for affiliation in affiliations:
