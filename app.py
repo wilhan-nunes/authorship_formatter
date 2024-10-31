@@ -4,14 +4,15 @@ import streamlit as st
 
 # Function to format authors and affiliations
 def format_authors_affiliations(df):
+    df.columns = df.columns.map(lambda x: x.lower().strip())
     authors = []
     affiliations_dict = {}
     affiliation_counter = 1
-    total_affiliations = len([x for x in df.columns.to_list() if 'Affiliation' in x]) + 1
+    total_affiliations = len([x for x in df.columns.to_list() if 'affiliation' in x]) + 1
 
     for _, row in df.iterrows():
-        full_name = f"{row['First Name']} {row['Middle Name'] if pd.notna(row['Middle Name']) else ''} {row['Surname']}".strip()
-        affiliations = [row[f'Affiliation{i}'] for i in range(1, total_affiliations) if pd.notna(row[f'Affiliation{i}'])]
+        full_name = f"{row['first Name']} {row['middle name'] if pd.notna(row['middle name']) else ''} {row['surname']}".strip()
+        affiliations = [row[f'affiliation{i}'] for i in range(1, total_affiliations) if pd.notna(row[f'affiliation{i}'])]
 
         affiliation_indices = []
         for affiliation in affiliations:
