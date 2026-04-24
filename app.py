@@ -68,7 +68,7 @@ df = pd.DataFrame(columns=column_names)
 
 st.title("Authors and Affiliations Formatter")
 st.write('The TSV should contain the following headers. Add as much affiliations as you need, numbering them sequentially.')
-st.write('Version: 2024.10.31')
+st.write('Version: 2026.04.24')
 st.table(df)
 
 uploaded_file = st.file_uploader("Choose a TSV file with author details", type="tsv")
