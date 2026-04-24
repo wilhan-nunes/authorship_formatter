@@ -59,7 +59,7 @@ def create_html_authors_file(authors, affiliations):
     """
     authors_list = ', '.join([author for author in authors])
     # authors_list = ', '.join([f"{author[:-1]}<sup>{author[-1]}</sup>" for author in authors])
-    affiliations_list = ''.join([f"<li><sup>{i.split('.')[0]}</sup> {i.split('.')[1]}</li>" for i in affiliations])
+    affiliations_list = ''.join([f"<li><sup>{i.split('.', 1)[0]}</sup> {i.split('.', 1)[1]}</li>" for i in affiliations])
     html_content = html_content.format(authors_list=authors_list, affiliations_list=affiliations_list)
     return html_content
 
