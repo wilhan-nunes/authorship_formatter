@@ -1,6 +1,8 @@
 import pandas as pd
 import streamlit as st
 
+st.set_page_config(layout="wide")
+
 
 # Function to format authors and affiliations
 def format_authors_affiliations(df):
@@ -63,22 +65,24 @@ def create_html_authors_file(authors, affiliations):
     html_content = html_content.format(authors_list=authors_list, affiliations_list=affiliations_list)
     return html_content
 
-column_names = ['Order', 'First Name', 'Middle Name', 'Surname', 'Affiliation1', 'Affiliation2']
-df = pd.DataFrame(columns=column_names)
-
 st.title("Authors and Affiliations Formatter")
 st.write('The TSV should contain the following headers. Add as much affiliations as you need, numbering them sequentially.')
 st.write('Version: 2026.04.24')
-st.table(df)
+
+example_df = pd.read_csv("sample_input.tsv", sep='\t')
+st.table(example_df)
 
 uploaded_file = st.file_uploader("Choose a TSV file with author details", type="tsv")
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file, sep='\t')
-    authors_list, affiliations_list = format_authors_affiliations(df)
+active_file = uploaded_file if uploaded_file is not None else "sample_input.tsv"
+df = pd.read_csv(active_file, sep='\t')
 
-    if st.button('Generate HTML'):
-        html_content = create_html_authors_file(authors_list, affiliations_list)
+st.markdown("### Preview & Edit")
+df = st.data_editor(df, num_rows="dynamic", use_container_width=True)
 
-        st.markdown("### Output:")
-        st.markdown(html_content, unsafe_allow_html=True)
+authors_list, affiliations_list = format_authors_affiliations(df)
+
+if st.button('Generate HTML'):
+    html_content = create_html_authors_file(authors_list, affiliations_list)
+    st.markdown("### Output:")
+    st.markdown(html_content, unsafe_allow_html=True)
