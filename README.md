@@ -2,6 +2,10 @@
 
 This Streamlit app (https://aut-formatter.streamlit.app/) allows you to upload a TSV file containing author details, processes the data, and generates an HTML-formatted list of authors with their corresponding affiliations. The output is displayed directly on the app page with proper superscripted affiliation numbers.
 
+# Standalone HTML app
+
+Alternatively, you can download and launch the `standalone_JS_app.html` as a self-contained, lightweight alternative to streamlit.
+
 ## Features
 - Loads a built-in example on startup so you can see the expected format immediately.
 - Upload a `.tsv` file to replace the example with your own data.
